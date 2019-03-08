@@ -38,7 +38,7 @@ const Section = styled.section`
   }
   button {
     width: 83%;
-    height: 45px;
+    height: 50px;
     margin: 5px;
     background-color: #60818a;
     color: white;
