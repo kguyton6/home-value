@@ -156,6 +156,7 @@ class Banner extends React.Component {
         <a
           href="https://www.lifehopeshomes.com/fine/real/estate/pp/custom"
           target="_blank"
+          rel="noopener noreferrer"
         >
           Privacy Policy{" "}
         </a>{" "}
