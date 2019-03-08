@@ -6,6 +6,7 @@ const express = require('express'),
       ctrl = require('./controller'),
      { SERVER_PORT } = process.env
 
+app.use( express.static( `${__dirname}/../build` ) );
 app.use(bodyParser.json())
 
 app.post('/api/send_data', ctrl.send_data)

@@ -16,7 +16,7 @@ const Section = styled.section`
   h1 {
     letter-spacing: 1.5px;
     text-align: center;
-
+    font-size: 26px;
   }
 
   form {
