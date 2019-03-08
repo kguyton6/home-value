@@ -10,7 +10,7 @@
 
 # production
 /build
-
+webpack.config.js
 # misc
 
 .env
