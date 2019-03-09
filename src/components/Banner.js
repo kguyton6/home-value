@@ -80,16 +80,9 @@ class Banner extends React.Component {
 
   submitData = () => {
     const { contact, name, email, number } = this.state
-    if(!name || !email || !number){
-      this.setState({errorMessage: 'Please Fill Out All Fields'})
-    }
-    console.log(this.state)
     axios.post("/api/send_data", { contact, name, email, number }).then(res => { 
-      if(res.status === 200) {
       this.setState({name: '', number: '', email: '', checked: true})
-      } else {
-        console.log(res.console.error())
-      }
+  
     }).catch(err => console.log(err) )
   };
   timer = () => {
