@@ -1,6 +1,8 @@
 {
   "short_name": "Home Value",
   "name": "Your Home Value",
+  "gcm_sender_id": "103953800507",
+
   "icons": [
     {
       "src": "favicon.ico",
