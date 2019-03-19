@@ -4,13 +4,16 @@ import FormControlLabel from "@material-ui/core/FormControlLabel";
 import axios from "axios";
 import Radio from "@material-ui/core/Radio";
 import Swal from 'sweetalert2'
+import Recaptcha from 'react-recaptcha'
+
+
 
 const Section = styled.section`
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 400px;
-  height: 450px;
+  width: 430px;
+  height: 480px;
   background-color: rgba(255, 255, 255, 0.774);
   padding: 20px;
   h1 {
@@ -65,15 +68,15 @@ const Section = styled.section`
   }
 
   @media (max-width: 400px) {
-    width: 80%;
-    height: 300px;
+    width: 90%;
+    /* height: 400px; */
 
     button {
       font-size: 13px;
     }
   }
 `;
-class Banner extends React.Component {
+class Form extends React.Component {
   state = {
     name: "",
     number: "",
@@ -81,40 +84,45 @@ class Banner extends React.Component {
     address: "",
     zipcode: '',
     contact: "text",
-    checked: true
+    checked: true,
+    isCaptchaValid: false,
+    isError: false,
+    messageSent: false
   };
   handleRadioButton = e => {
     this.setState({ checked: !this.state.checked, contact: e.target.value });
   };
 
-  handleInputs = e => {
-    this.setState({
-      [e.target.name]: e.target.value
-    });
+  handleInputs = event => {
+    if (event.target.value.length > 0 && event.target.name !== 'inputEmail') {
+      this.setState({
+        [event.target.name]: event.target.value
+      })
+    }
   };
 
   submitData = () => {
+    console.log(this.state)
     const { contact, name, email, number, address, zipcode } = this.state;
-  
-   axios.post("/api/send_data", {
-      contact,
-      name,
-      email,
-      number,
-      address,
-      zipcode
-    })
-    .then(() => {
+  let message = {contact, name, email, number, address, zipcode }
+   axios.post('/api/send', { message } )
+    .then((res) => {
+      this.clearForm()
       Swal.fire({
         title: '<strong>Thank You!</strong>',
         type: 'success',
         html: '<p>Heather Smith will contact you shortly!</p>',
         focusConfirm: true
       })
-      this.setState({  
-      address: "", zipcode: '', name: "", number: "", email: "", checked: true });
-    })
+     
+    }).catch(error=>this.setState({ error:error.message}));
+
   };
+
+  clearForm = () => {
+    this.setState({  
+      address: "", zipcode: '', name: "", number: "", email: "", checked: true });
+  }
 
   timer = () => {
     setTimeout(() => {
@@ -122,11 +130,19 @@ class Banner extends React.Component {
     }, 2500);
   };
 
+  onCaptchaVerify = (response) => {
+    console.log('captcha')
+    this.setState({
+      isCaptchaValid: true
+    })
+  }
+
+
   render() {
     return (
       <Section>
         <h1>Curious how much your home is worth? </h1>
-        <form onSubmit={this.submitData}>
+        <form action='#' onSubmit={this.submitData} >
           <span>
             <input
               value={this.state.name}
@@ -225,4 +241,4 @@ class Banner extends React.Component {
   }
 }
 
-export default Banner;
+export default Form;

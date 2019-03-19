@@ -1,21 +1,24 @@
 require("dotenv").config();
 const nodemailer = require("nodemailer");
-const {USER, PASS} = process.env
+const {PASSWORD,USERNAME} = require('./config.js')
+
+
 
 
 module.exports = {
-  send_data: (req, res, next) => {
-    const { email, name, contact, number, address, zipcode } = req.body;
-
+  send_data: async (req, res, next) => {
+    const {email, name, number, address, zipcode, contact} = req.body.message
     var transporter = nodemailer.createTransport({
-      service: "gmail",
+      host: 'smtp.mailgun.org',
+      port: 587,
       auth: {
-        user: USER,
-        pass: PASS
+        user: USERNAME,
+        pass: PASSWORD,
       }
+
     });
     const messageOptions = {
-      to: "kimguyton@gmail.com",
+      to: USERNAME,
       from: email,
       subject: "New Lead from Landing Page",
       html: `<strong>
@@ -32,6 +35,7 @@ module.exports = {
       if(err)
       console.log(err)
     else
+    console.log(info)
       res.status(200).send(info);
     });
 
