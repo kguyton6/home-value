@@ -44,8 +44,5 @@
     "not ie <= 11",
     "not op_mini all"
   ],
-  "devDependencies": {
-    "proxy": "http://localhost:8080",
-    "image-webpack-loader": "^4.6.0"
-  }
+   "proxy": "http://localhost:8080"
 }
