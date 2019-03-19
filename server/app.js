@@ -5,7 +5,7 @@ const express = require('express'),
       path = require('path')
 
 
-app.use(express.static(path.join(__dirname, 'build')));
+app.use(express.static(path.join(`${__dirname}/../build`)));
 
 app.use(function(req, res, next) {
      res.header("Access-Control-Allow-Origin", "*");
@@ -15,12 +15,6 @@ app.use(function(req, res, next) {
    
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true })); 
-
-
-app.get('/', function(req, res) {
-     res.sendFile(path.join(__dirname, 'build', 'index.html'));
-   });
-
 
 
 app.post('/api/send', ctrl.send_data )
