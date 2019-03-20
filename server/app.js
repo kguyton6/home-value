@@ -3,7 +3,7 @@ const express = require('express'),
       bodyParser = require('body-parser'),
       ctrl = require('./controller'),
       path = require('path')
-
+      Mailgun = require('mailgun-js')
 
 app.use(express.static(path.join(`${__dirname}/../build`)));
 
@@ -18,7 +18,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 
 app.post('/api/send', ctrl.send_data )
-
+app.get('/send/email', ctrl.send_email)
 
 
 
