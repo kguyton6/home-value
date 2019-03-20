@@ -18,7 +18,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 
 app.post('/api/send', ctrl.send_data )
-app.get('/send/email', ctrl.send_email)
+
 
 
 
