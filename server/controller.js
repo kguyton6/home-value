@@ -1,6 +1,6 @@
 require("dotenv").config();
 const nodemailer = require("nodemailer");
-const {PASSWORD,USERNAME} = require('./config.js')
+const {PASSWORD, EMAIL} = require('./config.js')
 
 
 
@@ -12,13 +12,13 @@ module.exports = {
       host: 'smtp.mailgun.org',
       port: 587,
       auth: {
-        user: USERNAME,
+        user: EMAIL,
         pass: PASSWORD,
       }
 
     });
     const messageOptions = {
-      to: USERNAME,
+      to: EMAIL,
       from: email,
       subject: "New Lead from Landing Page",
       html: `<strong>
