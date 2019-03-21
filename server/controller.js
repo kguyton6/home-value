@@ -1,12 +1,13 @@
 require("dotenv").config();
 const nodemailer = require("nodemailer");
-const {PASSWORD, EMAIL, API_KEY} = require('./config.js')
-
-
+const {PASSWORD, EMAIL, MYNUMBER, TWILIO_NUMBER, ACCOUNT_SID, AUTH_TOKEN} = require('./config.js')
+const accountSid = ACCOUNT_SID;
+const authToken = AUTH_TOKEN;
+const client = require('twilio')(accountSid, authToken);
 
 
 module.exports = {
-  send_data: async (req, res, next) => {
+  send_email: async (req, res, next) => {
     const {email, name, number, address, zipcode, contact} = req.body.message
     var transporter = nodemailer.createTransport({
       host: 'smtp.mailgun.org',
@@ -35,10 +36,21 @@ module.exports = {
       if(err)
       console.log(err)
     else
-    console.log(info)
       res.status(200).send(info);
     });
 
+    next()
   },
-  
+  send_sms: (req, res, next) => {
+    const {name, number} = req.body.message
+client.messages
+  .create({
+     body: `New Lead: ${name} \n
+     Number: ${number}`,
+     from: TWILIO_NUMBER,
+     to: MYNUMBER
+   })
+  .then(message => console.log(message.sid));
+
+  }
 };

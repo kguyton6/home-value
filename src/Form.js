@@ -4,7 +4,7 @@ import FormControlLabel from "@material-ui/core/FormControlLabel";
 import axios from "axios";
 import Radio from "@material-ui/core/Radio";
 import Swal from 'sweetalert2'
-import Recaptcha from 'react-recaptcha'
+
 
 
 
@@ -15,7 +15,8 @@ const Section = styled.section`
   width: 430px;
   height: 480px;
   background-color: rgba(255, 255, 255, 0.774);
-  padding: 20px;
+  padding: 40px 20px 20px 20px;
+  box-sizing: border-box;
   h1 {
     letter-spacing: 1.5px;
     text-align: center;

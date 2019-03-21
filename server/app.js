@@ -3,7 +3,8 @@ const express = require('express'),
       bodyParser = require('body-parser'),
       ctrl = require('./controller'),
       path = require('path')
-      Mailgun = require('mailgun-js')
+      Mailgun = require('mailgun-js'),
+      MessagingResponse = require('twilio').twiml.MessagingResponse;
 
 app.use(express.static(path.join(`${__dirname}/../build`)));
 
@@ -17,8 +18,16 @@ app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true })); 
 
 
-app.post('/api/send', ctrl.send_data )
+app.post('/api/send', ctrl.send_email, ctrl.send_sms )
 
+app.post('/sms', (req, res) => {
+  const twiml = new MessagingResponse();
+
+  twiml.message('The Robots are coming! Head for the hills!');
+
+  res.writeHead(200, {'Content-Type': 'text/xml'});
+  res.end(twiml.toString());
+});
 
 
 
