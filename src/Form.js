@@ -28,6 +28,7 @@ const StyledForm = styled.form`
     height: 45px;
     margin: 5px;
     text-indent: 10px;
+    &:focus {outline-color: red;}
   }
   .name,
   .address {
@@ -37,7 +38,7 @@ const StyledForm = styled.form`
     width: 80%;
     margin-bottom: 10px;
   }
-  .number {
+  .number, .zipcode {
     width: 180px;
   }
   button {
@@ -65,10 +66,13 @@ const StyledForm = styled.form`
     width: 90%;
     justify-content: space-evenly;
   }
+  @media (max-width: 550px) {
+    width: 80%;
+    height: 350px;
 
+  }
   @media (max-width: 400px) {
     width: 90%;
-    /* height: 400px; */
 
     button {
       font-size: 13px;
@@ -84,7 +88,6 @@ class Form extends React.Component {
     zipcode: '',
     contact: "text",
     checked: true,
-    isCaptchaValid: false,
     isError: false,
     messageSent: false
   };
@@ -93,26 +96,23 @@ class Form extends React.Component {
   };
 
   handleInputs = event => {
-    if (event.target.value.length > 0 && event.target.name !== 'inputEmail') {
       this.setState({
         [event.target.name]: event.target.value
       })
-    }
   };
 
   submitData = () => {
-    console.log(this.state)
     const { contact, name, email, number, address, zipcode } = this.state;
   let message = {contact, name, email, number, address, zipcode }
    axios.post('/api/send', { message } )
     .then((res) => {
-      this.clearForm()
       Swal.fire({
         title: '<strong>Thank You!</strong>',
         type: 'success',
         html: '<p>Heather Smith will contact you shortly!</p>',
         focusConfirm: true
       })
+      this.clearForm()
      
     }).catch(error=>this.setState({ error:error.message}));
 
@@ -129,19 +129,13 @@ class Form extends React.Component {
     }, 2500);
   };
 
-  onCaptchaVerify = (response) => {
-    console.log('captcha')
-    this.setState({
-      isCaptchaValid: true
-    })
-  }
-
 
   render() {
     return (
       <StyledForm action='#' onSubmit={this.submitData}>
           <span>
             <input
+             required
               value={this.state.name}
               placeholder="Full Name"
               className="name"
@@ -150,6 +144,7 @@ class Form extends React.Component {
               onChange={this.handleInputs}
             />{" "}
             <input
+             required
               value={this.state.number}
               placeholder="Phone Number"
               type="number"
@@ -160,6 +155,7 @@ class Form extends React.Component {
           </span>
           <span>
             <input
+             required
               value={this.state.address}
               placeholder="Address"
               className="address"
@@ -168,12 +164,12 @@ class Form extends React.Component {
               onChange={this.handleInputs}
             />{" "}
             <input
+             required
               value={this.state.zipcode}
               placeholder="Zipcode"
               className="zipcode"
               type="number"
               name="zipcode"
-              className="number"
               onChange={this.handleInputs}
             />{" "}
           </span>
@@ -185,6 +181,7 @@ class Form extends React.Component {
             }}
           >
             <input
+              required
               value={this.state.email}
               placeholder="Email"
               className="email"

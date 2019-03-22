@@ -18,12 +18,12 @@ app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true })); 
 
 
-app.post('/api/send', ctrl.send_email, ctrl.send_sms )
+app.post('/api/send', ctrl.send_email )
 
 app.post('/sms', (req, res) => {
   const twiml = new MessagingResponse();
-
-  twiml.message('The Robots are coming! Head for the hills!');
+  
+  twiml.message('Thank you for your information. I will contact you shortly.   --Heather');
 
   res.writeHead(200, {'Content-Type': 'text/xml'});
   res.end(twiml.toString());

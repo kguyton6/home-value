@@ -23,14 +23,14 @@ module.exports = {
       from: email,
       subject: "New Lead from Landing Page",
       html: `<strong>
-                  New Lead <br/>
+                  Contact Information: </strong> <br/>
                   Name: ${name} <br/>
                   Phone Number: ${number} <br/>
                   Email: ${email} <br/>
                   Address: ${address} <br/>
                   Zipcode: ${zipcode} <br/>
                   Preferred Contact Method: ${contact} <br/>
-                  </strong>`
+                 `
     };
     transporter.sendMail(messageOptions, (err, info) => {
       if(err)
