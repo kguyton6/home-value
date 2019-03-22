@@ -10,11 +10,12 @@ const Main = styled.main`
   background-repeat: no-repeat;
   background-size: cover;
   display: flex;
-  justify-content: center;
   align-items: center;
-  
+  flex-direction: column;
   width: 100%;
   height: 100vh;
+  position: relative;
+  h1 {font-weight: bold; font-size: 60px; color: white; width: 55%; text-align: center; margin: 50px;}
 `
 
 
@@ -22,6 +23,7 @@ const Main = styled.main`
 const App = () => {
     return (
      <Main>
+       <h1>Find Out What Your <br/> House Is Worth</h1>
        <Form />
      </Main>
     );

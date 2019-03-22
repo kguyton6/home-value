@@ -8,14 +8,14 @@ import Swal from 'sweetalert2'
 
 
 
-const Section = styled.section`
+const StyledForm = styled.form`
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 430px;
-  height: 480px;
+  width: 500px;
+  height: 350px;
   background-color: rgba(255, 255, 255, 0.774);
-  padding: 40px 20px 20px 20px;
+  padding: 20px;
   box-sizing: border-box;
   h1 {
     letter-spacing: 1.5px;
@@ -23,25 +23,22 @@ const Section = styled.section`
     font-size: 26px;
   }
 
-  form {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    width: 93%;
-    height: 70%;
-    align-items: center;
-  }
-  form input {
+  
+ input {
     height: 45px;
     margin: 5px;
     text-indent: 10px;
   }
   .name,
   .address {
-    width: 200px;
+    width: 60%;
   }
   .email {
-    width: 260px;
+    width: 80%;
+    margin-bottom: 10px;
+  }
+  .number {
+    width: 180px;
   }
   button {
     width: 83%;
@@ -62,9 +59,10 @@ const Section = styled.section`
   }
   span {
     width: 100%;
+
   }
   div {
-    width: 70%;
+    width: 90%;
     justify-content: space-evenly;
   }
 
@@ -141,9 +139,7 @@ class Form extends React.Component {
 
   render() {
     return (
-      <Section>
-        <h1>Curious how much your home is worth? </h1>
-        <form action='#' onSubmit={this.submitData} >
+      <StyledForm action='#' onSubmit={this.submitData}>
           <span>
             <input
               value={this.state.name}
@@ -158,6 +154,7 @@ class Form extends React.Component {
               placeholder="Phone Number"
               type="number"
               name="number"
+              className="number"
               onChange={this.handleInputs}
             />{" "}
           </span>
@@ -176,6 +173,7 @@ class Form extends React.Component {
               className="zipcode"
               type="number"
               name="zipcode"
+              className="number"
               onChange={this.handleInputs}
             />{" "}
           </span>
@@ -195,7 +193,6 @@ class Form extends React.Component {
               onChange={this.handleInputs}
             />{" "}
           </span>
-        </form>{" "}
         {this.state.errorMessage ? (
           <span style={{ color: "red", padding: "5px" }}>
             {" "}
@@ -237,7 +234,7 @@ class Form extends React.Component {
         >
           Privacy Policy{" "}
         </a>{" "}
-      </Section>
+      </StyledForm>
     );
   }
 }
