@@ -228,7 +228,7 @@ class Form extends React.Component {
           Get Home Value{" "}
         </button>{" "}
         <a
-          href="https://www.lifehopeshomes.com/fine/real/estate/pp/custom"
+          href="https://app.termly.io/document/privacy-policy/b4af483e-d407-4e3e-8a85-1ecc264672c2"
           target="_blank"
           rel="noopener noreferrer"
         >

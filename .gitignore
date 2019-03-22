@@ -12,7 +12,8 @@
 /build
 
 # misc
-
+.ecosystem.config.js
+.env_production
 .env
 .DS_Store
 .env.local
